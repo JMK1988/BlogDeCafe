@@ -91,11 +91,18 @@ mensaje.addEventListener('input', leerTexto);
 formulario.addEventListener('submit', function(e) {
     e.preventDefault();
     //validar formulario
+    const { nombre, email, mensaje} = datos;
+    
+    if(nombre === '' || email === '' || mensaje === ''){
+        mostrarAlerta('Todos los campos son obligatorios', 'error')
+
+        return;/*corta el codigo*/
+    }
+        mostrarAlerta('Mensaje enviado')
 
     //enviar formulario
 
-    
-})
+});
 
 
 function leerTexto(e) {
@@ -104,10 +111,44 @@ function leerTexto(e) {
     
     
 
-    console.log(datos);
+    //console.log(datos);
 };
 
 // elemento de submit
 
 
+function mostrarAlerta(mensaje, error = null) {
+    const alerta = document.createElement('P');
+    alerta.textContent = mensaje;
+
+    if(error) {
+        alerta.classList.add('error');
+    }else {
+        alerta.classList.add('correcto')
+    }
+
+    formulario.appendChild(alerta);
+    setTimeout(() => {
+        alerta.remove();
+    }, 5000)
+
+}
+
+//muestra un error en pantalla
+/* function mostrarError(mensaje) {
+    formulario.appendChild( error );
+    //desaparesca despues de 5 seg
+
+    setTimeout(() => {
+        error.remove();
+    }, 5000)
+};
+
+function mostrarConfirmacion(mensaje) { 
+    formulario.appendChild( aviso );
+    setTimeout(() => {
+        aviso.remove();
+    }, 5000)
+} */
+ 
 
